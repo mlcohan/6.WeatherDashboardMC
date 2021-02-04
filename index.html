@@ -25,7 +25,7 @@
   </header>
 
   <!--Sidebar Content-->
-  <div class="container">
+  <div class="container width 25%">
     <div class="row">
       <div class="col-3">
     <h4>Search for a City:</h4>
@@ -34,13 +34,13 @@
       <button id="searchBtn" type="submit"><i class="fa fa-search"></i></button>
     </form>
 
-    <ul class="list-group pastSearch"></ul>
+    <ul class="list-group col-3" id="pastSearch"></ul>
   </div>
 
 <!--Center Content-->
-  <div class="col d-flex justify-content-center" id="searchResults" style="width: 50%" display="text-center">
+  <div class="col d-flex justify-content-center width=50%" id="searchResults" style="width: 50%" display="text-center">
     <div id=weather>
-    <div id="icon" ><img id="wicon" src="" alt="Weather icon"></div>
+    <div id="fiveDay" class="row"></div>
   </div>
   </div>
 </div>
