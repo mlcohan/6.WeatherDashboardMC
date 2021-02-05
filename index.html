@@ -25,26 +25,27 @@
   </header>
 
   <!--Sidebar Content-->
-  <div class="container width 25%">
+  <div class="container">
     <div class="row">
       <div class="col-3">
-    <h4>Search for a City:</h4>
-    <form class="searchBar">
-      <input id="searchInput" type="text" placeholder="Search.." name="search">
-      <button id="searchBtn" type="submit"><i class="fa fa-search"></i></button>
-    </form>
+        <h4>Search for a City:</h4>
+        <form class="searchBar">
+          <input id="searchInput" type="text" placeholder="Search.." name="search">
+          <button id="searchBtn" type="submit"><i class="fa fa-search"></i></button>
+        </form>
 
-    <ul class="list-group col-3" id="pastSearch"></ul>
-  </div>
+        <ul id="pastSearch"></ul>
+      </div>
 
 <!--Center Content-->
-  <div class="col d-flex justify-content-center width=50%" id="searchResults" style="width: 50%" display="text-center">
-    <div id=weather>
-    <div id="fiveDay" class="row"></div>
+      <div class="col-9" id="searchResults" display="text-center">
+        <div id=weather>
+        </div>
+        <div id="fiveDay" class="row">
+        </div>
+      </div>
+    </div>
   </div>
-  </div>
-</div>
-</div>
 
 
   <!--link jQuery and JS sheet-->

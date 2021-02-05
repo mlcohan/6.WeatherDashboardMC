@@ -1,49 +1,64 @@
-
 $(document).ready(function() {
 
-
-
-
- 
+    //pull up past searches 
+    var pastSearch = JSON.parse(localStorage.getItem("#pastSearch"));    
+  
+     $("#fiveDay").val(pastSearch)
 
     $("#searchBtn").on("click", function(event) {
         event.preventDefault()
+        
+    var searchValue = $("#searchInput").val();
+
+     //searched city array
+         var searchArray = []
+               searchArray.push(JSON.stringify(searchValue))
+
 
     
-        searchValue = ""
-    var searchValue = $("#searchInput").val();
+     //get rid of error message if nothing in search
+     if (searchValue === "") {
+        return
+    }
+    else {
         console.log(searchValue);
 
-        if (searchValue === "") {
-            return
-        }
-        else {
-    //pull up past searches 
-    var pastSearches = JSON.parse(localStorage.getItem("#pastSearch"));    
-    $("#pastSearch").append("<ul>"+ pastSearches + "</ul>")
-
-    console.log(pastSearches)
+ 
     
-    //function to diplay history
-    function displayHistory() {
-    //Use local stoage to save weather search
-     localStorage.setItem("#pastSearch", JSON.stringify(searchValue))
-    }
+    //need a way to differentiate new rows with appended buttons for loop?
+    var button = $("<button class = 'btn btn-primary'></button")
+    button.text(pastSearch)
+    button.click(function(){
+    
+    var city =  $(this).text()
+
+    getApi(city)
+
+    console.log(city)
+
+
+    })
+    var searchRow = $("<div></div>") 
+    searchRow.addClass("row")
+    searchRow.attr("id", "searchRow")
+    $("#pastSearch").append(searchRow)
+    $("#searchRow").append(button)
+    $("#searchRow").removeAttr("id")
+
+    console.log(pastSearch)
+    
 
     
-        //display History
-        displayHistory()
-        getApi()
-        }
+        
       // clear input box
       $("#searchInput").val("")
 
+        }
     
     
-    
-
+        getApi(searchValue)
 //function to get data from the API used to get lat/lon
-    function getApi () {
+    function getApi (searchValue) {
 
         var APIkey = "5a9bcc7ae1c44f294dec0c1395fed462";      
         var apiSearchCity = "http://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&appid=" + APIkey;
@@ -63,7 +78,6 @@ $(document).ready(function() {
 
             console.log(data)
 
-        
         //use lat lon to call second API
         
         fetch(apiSearchLatLon)
@@ -86,8 +100,8 @@ $(document).ready(function() {
            //empty weather card and fill with input city 
 
             $("#weather").empty();
-            resultCard = $("#searchResults").append("<div class='card' 'bg-light' 'text-dark' 'mb-3', 'p-3'></div>")
-            cardBody = $("#weather").append('<div class="card body"></div>')
+            // var resultCard = $("#searchResults").append("<div class='card' 'bg-light' 'text-dark' 'mb-3', 'p-3'></div>")
+            var cardBody = $("#weather").append('<div class="card body"></div>')
             $(cardBody).append('<h1 class = "card-title">' + data.city.name + '  (' + nd + ') <img src="http://openweathermap.org/img/wn/' + data2.current.weather[0].icon + '@2x.png" alt="Weather icon"></h2>'
             // $(cardBody).append('<img src="http://openweathermap.org/img/wn/' + data2.current.weather[0].icon + '@2x.png" alt="Weather icon">'
                                  +"<p class='card-text'> Temperature: "  + data2.current.temp + " °F <br/></p>"
@@ -111,9 +125,30 @@ $(document).ready(function() {
                 // $("#searchResults").append(data)   
                 console.log(data2)
 
-        //five day forcast
-        //  $("#fiveDay").append("<div class = 'col-3'><h1 class = 'card-title'> " + nd + " </h1></div>")   
-         $("#fiveDay").append("<p class ='card-text>" + data2.current.wind_speed + "</p></div>")   
+
+            $("#fiveDay").empty()
+            $("#fiveDay").append("<h4 class = 'col-12'>Five Day Forecast</h4>")
+        
+          //five day forecast
+          for (var i=1; i<6; i++){
+              var temperature = data2.daily[i].temp.day
+              var humidity = data2.daily[i].humidity
+              var icon = data2.daily[i].weather[0].icon
+              var date = (new Date(data2.daily[i].dt*1000).toLocaleDateString('en-US'))
+
+              console.log(date)
+
+            var fiveDayCard = $("<div class = 'col-2'></div>")
+            
+
+              $(fiveDayCard).append( "<p class='card-text'> " + date + " </p>"
+                                    +"<img src='http://openweathermap.org/img/wn/" + icon + "@2x.png' class= 'date' alt='Weather icon'>"           
+                                    +"<p class='card-text'> Temperature: "  + temperature + " °F <br/></p>"
+                                   +"<p class='card-text'> Humidity: " + humidity + " % <br/></p>")
+            
+                $("#fiveDay").append(fiveDayCard)
+          }
+
 
          
           })  
@@ -129,5 +164,5 @@ $(document).ready(function() {
     
 
 
-
 })
+
