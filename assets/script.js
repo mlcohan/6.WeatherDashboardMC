@@ -1,9 +1,6 @@
 $(document).ready(function() {
 
-    //pull up past searches 
-    var pastSearch = JSON.parse(localStorage.getItem("#pastSearch"));    
-  
-     $("#fiveDay").val(pastSearch)
+$()
 
     $("#searchBtn").on("click", function(event) {
         event.preventDefault()
@@ -22,15 +19,21 @@ $(document).ready(function() {
     }
     else {
         console.log(searchValue);
+         //Use local storage to save weather search
+         localStorage.setItem("#pastSearch", searchArray)
+    
+         console.log(searchArray);
 
- 
+
+    //pull up past searches 
+    var pastSearch = JSON.parse(localStorage.getItem("#pastSearch"));   
     
     //need a way to differentiate new rows with appended buttons for loop?
     var button = $("<button class = 'btn btn-primary'></button")
     button.text(pastSearch)
     button.click(function(){
     
-    var city =  $(this).text()
+    var city =    $(this).text()
 
     getApi(city)
 
@@ -78,6 +81,7 @@ $(document).ready(function() {
 
             console.log(data)
 
+        
         //use lat lon to call second API
         
         fetch(apiSearchLatLon)
@@ -130,11 +134,11 @@ $(document).ready(function() {
             $("#fiveDay").append("<h4 class = 'col-12'>Five Day Forecast</h4>")
         
           //five day forecast
-          for (var i=1; i<6; i++){
+          for (var i=0; i<5; i++){
               var temperature = data2.daily[i].temp.day
               var humidity = data2.daily[i].humidity
               var icon = data2.daily[i].weather[0].icon
-              var date = (new Date(data2.daily[i].dt*1000).toLocaleDateString('en-US'))
+              var date = (new Date(data2.daily[i].dt*1000)).toLocaleDateString('en-US')
 
               console.log(date)
 
@@ -166,3 +170,7 @@ $(document).ready(function() {
 
 })
 
+//create a new local storage variable that holds an array/object of ALL past searches 
+//possibily button appending in a for loop, go through the array to append
+//make appended buttons work (on button create, set button value as city name, and plug it in the ) Look at fridge examples attr.("value", cityName) <-- variable 
+//
