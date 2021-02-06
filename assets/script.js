@@ -20,11 +20,10 @@ $()
     else {
         console.log(searchValue);
          //Use local storage to save weather search
-         if(!localStorage.getItem('#pastSearch')) {
-         window.localStorage.setItem("#pastSearch", searchArray)
+         localStorage.setItem("#pastSearch", searchArray)
     
          console.log(searchArray);
-         }
+         
 
 
     //pull up past searches 
@@ -136,7 +135,7 @@ $()
             $("#fiveDay").append("<h4 class = 'col-12'>Five Day Forecast</h4>")
         
           //five day forecast
-          for (var i=1; i<6; i++){
+          for (var i=0; i<5; i++){
               var temperature = data2.daily[i].temp.day
               var humidity = data2.daily[i].humidity
               var icon = data2.daily[i].weather[0].icon
