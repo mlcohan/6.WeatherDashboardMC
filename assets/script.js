@@ -64,7 +64,7 @@ $()
     function getApi (searchValue) {
 
         var APIkey = "5a9bcc7ae1c44f294dec0c1395fed462";      
-        var apiSearchCity = "http://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&appid=" + APIkey;
+        var apiSearchCity = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&appid=" + APIkey;
         
 
 
