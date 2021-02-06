@@ -146,7 +146,7 @@ $()
             
 
               $(fiveDayCard).append( "<p class='card-text'> " + date + " </p>"
-                                    +"<img src='http://openweathermap.org/img/wn/" + icon + "@2x.png' class= 'date' alt='Weather icon'>"           
+                                    +"<img src='https://openweathermap.org/img/wn/" + icon + "@2x.png' class= 'date' alt='Weather icon'>"           
                                     +"<p class='card-text'> Temperature: "  + temperature + " °F <br/></p>"
                                    +"<p class='card-text'> Humidity: " + humidity + " % <br/></p>")
             
