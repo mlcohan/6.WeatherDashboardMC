@@ -132,7 +132,7 @@ function displayStorage(){
   $("#pastSearch").empty()
   for (var i=0; i < pastSearch.length; i++){ 
 
-  var button = $("<button class = 'btn btn-primary col-8'></button")
+  var button = $("<button class = 'btn btn-primary col-9'></button")
   button.text(pastSearch[i])
   button.click(function(){
   var city =  $(this).text()
