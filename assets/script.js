@@ -21,32 +21,16 @@ $(document).ready(function() {
       localStorage.setItem("history", JSON.stringify(pastSearch))
       displayStorage();
       console.log(localStorage)
-    //need a way to differentiate new rows with appended buttons for loop?
-  //   for (var i = 0; i < pastSearch.length; i++){
-  //   var button = $("<button class = 'btn btn-primary'></button")
-  //   button.text(pastSearch[i])
-  //   button.click(function(){
-  //     var city =    $(this).text()
-  //     getApi(city)
-  //   })
-  //   var searchRow = $("<div></div>") 
-  //   searchRow.addClass("row")
-  //   searchRow.attr("id", "searchRow")
-  //   $("#pastSearch").append(searchRow)
-  //   $("#searchRow").append(button)
-  //   $("#searchRow").removeAttr("id")
-  // }
         
       // clear input box
       $("#searchInput").val("")
         }
     
-    
         getApi(searchValue)
 
 })
 
-//function to get data from the API used to get lat/lon
+//function to get data from the API used to get lat/lon for weather info
 function getApi (searchValue) {
   var APIkey = "5a9bcc7ae1c44f294dec0c1395fed462";      
   var apiSearchCity = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&appid=" + APIkey;
@@ -148,7 +132,7 @@ function displayStorage(){
   $("#pastSearch").empty()
   for (var i=0; i < pastSearch.length; i++){ 
 
-  var button = $("<button class = 'btn btn-primary'></button")
+  var button = $("<button class = 'btn btn-primary col-8'></button")
   button.text(pastSearch[i])
   button.click(function(){
   var city =  $(this).text()
